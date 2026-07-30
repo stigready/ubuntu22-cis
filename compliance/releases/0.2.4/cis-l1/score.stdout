@@ -1,16 +1,14 @@
 {
-  "pass": 96,
-  "fail": 7,
+  "pass": 98,
+  "fail": 5,
   "other": 0,
   "total_scored": 103,
-  "score": 93.2,
+  "score": 95.15,
   "min_score": 90.0,
   "meets_floor": true,
   "gate_pass": true,
   "enforce": true,
   "failures": [
-    "account_disable_post_pw_expiration",
-    "accounts_maximum_age_login_defs",
     "accounts_minimum_age_login_defs",
     "accounts_passwords_pam_faillock_deny",
     "accounts_passwords_pam_faillock_interval",
@@ -19,5 +17,5 @@
   ],
   "regressions": [],
   "baseline": null,
-  "openscap_line": "OpenSCAP: pass=96 fail=7 score=93.2% (target 90%)"
+  "openscap_line": "OpenSCAP: pass=98 fail=5 score=95.1% (target 90%)"
 }

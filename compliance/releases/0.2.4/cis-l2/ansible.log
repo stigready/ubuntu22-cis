@@ -8735,6 +8735,39 @@ skipping: [localhost]
 TASK [/stigforge/roles/ubuntu22_cis : Set permissions for /etc/audit/rules.d/ file(s)] ***
 skipping: [localhost]
 
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set PASS_MAX_DAYS in /etc/login.defs (accounts_maximum_age_login_defs)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set PASS_MIN_DAYS in /etc/login.defs (accounts_minimum_age_login_defs)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set INACTIVE in /etc/default/useradd (account_disable_post_pw_expiration)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - ensure PAM runtime packages (CIS faillock/pwhistory prerequisites)] ***
+ok: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - ensure /etc/security/faillock.conf exists] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set faillock deny (accounts_passwords_pam_faillock_deny)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set faillock unlock_time (accounts_passwords_pam_faillock_unlock_time)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - set faillock even_deny_root (accounts_passwords_pam_faillock_root_unlock_time)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - enable pam_faillock on common-auth (accounts_passwords_pam_faillock_enabled)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - enable pam_faillock preauth on common-auth (accounts_passwords_pam_faillock_enabled)] ***
+changed: [localhost]
+
+TASK [/stigforge/roles/ubuntu22_cis : StigForge supplement - enable pam_pwhistory on common-password (accounts_password_pam_pwhistory_enabled)] ***
+changed: [localhost]
+
 PLAY RECAP *********************************************************************
-localhost                  : ok=177  changed=27   unreachable=0    failed=0    skipped=2643 rescued=0    ignored=0   
+localhost                  : ok=188  changed=37   unreachable=0    failed=0    skipped=2643 rescued=0    ignored=0   
 

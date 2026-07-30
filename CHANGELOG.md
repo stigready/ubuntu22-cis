@@ -2,6 +2,23 @@
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.2.4] - 2026-07-30
+
+### Changed
+- StigForge export refresh for `ubuntu22_cis` at `0.2.4`.
+
+### Verified (OpenSCAP)
+
+- **`cis-l1`** — score **95.15%** (floor 90.0%) · gate **PASS** · evidence `20260729T223207Z`
+  - Remaining counted failures: `accounts_minimum_age_login_defs, accounts_passwords_pam_faillock_deny, accounts_passwords_pam_faillock_interval, accounts_passwords_pam_faillock_unlock_time, set_password_hashing_algorithm_logindefs`
+- **`cis-l2`** — score **96.12%** (floor 90.0%) · gate **PASS** · evidence `20260729T223441Z`
+  - Remaining counted failures: `accounts_passwords_pam_faillock_deny, accounts_passwords_pam_faillock_interval, accounts_passwords_pam_faillock_unlock_time, set_password_hashing_algorithm_logindefs`
+
+### Provenance
+
+- Factory pipeline: https://github.com/stigready/stigforge/actions/runs/30496236357
+- Factory commit: `7f7cafc85a392bf2a7eb04f1b979185dbcdf5530`
+
 ## [0.2.4-private-review] - 2026-07-29
 
 ### Changed
