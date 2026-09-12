@@ -2,6 +2,27 @@
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.0] - 2026-09-12
+
+### Changed
+- StigForge export refresh for `ubuntu22_cis` at `0.3.0`.
+
+### Verified (OpenSCAP)
+
+- **`cis-l1`** — score **98.51%** (floor 90.0%) · gate **PASS** · evidence `20260912T124212Z`
+  - Remaining counted failures: `file_permissions_ungroupowned, use_pam_wheel_group_for_su`
+- **`cis-l2`** — score **98.53%** (floor 90.0%) · gate **PASS** · evidence `20260912T124505Z`
+  - Remaining counted failures: `file_permissions_ungroupowned, use_pam_wheel_group_for_su`
+- **`cis-ws-l1`** — score **98.47%** (floor 90.0%) · gate **PASS** · evidence `20260912T124702Z`
+  - Remaining counted failures: `file_permissions_ungroupowned, use_pam_wheel_group_for_su`
+- **`cis-ws-l2`** — score **98.52%** (floor 90.0%) · gate **PASS** · evidence `20260912T124937Z`
+  - Remaining counted failures: `file_permissions_ungroupowned, use_pam_wheel_group_for_su`
+
+### Provenance
+
+- Factory pipeline: https://github.com/stigready/stigforge/actions/runs/34693316989
+- Factory commit: `562a1f7c1a8e19235ee26e972174d1be6c88998c`
+
 ## [0.2.4] - 2026-07-30
 
 ### Changed

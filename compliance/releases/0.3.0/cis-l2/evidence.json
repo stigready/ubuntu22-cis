@@ -1,0 +1,103 @@
+{
+  "kind": "stigforge-verify-cell",
+  "role": "ubuntu22_cis",
+  "profile": "cis-l2",
+  "product": "ubuntu2204",
+  "timestamp": "20260912T124505Z",
+  "outcome": "success",
+  "matrix": {
+    "role": "ubuntu22_cis",
+    "profile": "cis-l2",
+    "product": "ubuntu2204",
+    "family": "debian",
+    "docker_image": "stigforge-verify-ubuntu2204",
+    "xccdf_profile": "xccdf_org.ssgproject.content_profile_cis_level2_server",
+    "ssg_datastream": "ssg-ubuntu2204-ds.xml",
+    "verify_datastream_rocky": null,
+    "matrix_status": "green",
+    "required": false,
+    "min_score": 90
+  },
+  "provenance": {
+    "commit": "",
+    "commit_short": "",
+    "pipeline_run_id": "",
+    "pipeline_url": "",
+    "repository": "",
+    "workflow": ""
+  },
+  "gates": {
+    "ansible": {
+      "rc": 0
+    },
+    "openscap": {
+      "status": "pass",
+      "score": 98.53,
+      "pass": 134,
+      "fail": 2,
+      "floor": 90.0,
+      "enforce": true,
+      "meets_floor": true
+    }
+  },
+  "poam": {
+    "total_exceptions": 2,
+    "policy_exempt_count": 32
+  },
+  "artifacts": [
+    {
+      "name": "OpenSCAP score summary (JSON)",
+      "desc": "pass/fail counts, floor gate, failure rule ids",
+      "local": "score.json",
+      "bytes": 375
+    },
+    {
+      "name": "OpenSCAP results (XCCDF)",
+      "desc": "machine-readable per-rule results",
+      "local": "results.xml",
+      "bytes": 8606617
+    },
+    {
+      "name": "OpenSCAP ARF",
+      "desc": "Asset Reporting Format \u2014 POA&M source (stigready parity)",
+      "local": "arf.xml",
+      "bytes": 19888624
+    },
+    {
+      "name": "OpenSCAP score line",
+      "desc": "gate stdout shape for log parsing",
+      "local": "openscap-score.txt",
+      "bytes": 51
+    },
+    {
+      "name": "POA&M",
+      "desc": "failures + policy-exempt inventory",
+      "local": "poam.md",
+      "bytes": 1481
+    },
+    {
+      "name": "Ansible apply log",
+      "desc": "role application inside verify container",
+      "local": "ansible.log",
+      "bytes": 429362
+    },
+    {
+      "name": "Ansible exit code",
+      "desc": "apply return code (oscap still runs)",
+      "local": "ansible.rc",
+      "bytes": 13
+    },
+    {
+      "name": "OpenSCAP exit code",
+      "desc": "oscap xccdf eval return code",
+      "local": "oscap.rc",
+      "bytes": 11
+    },
+    {
+      "name": "Score gate stdout",
+      "desc": "stigforge score CLI output",
+      "local": "score.stdout",
+      "bytes": 375
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "pass": 134,
+  "fail": 2,
+  "other": 0,
+  "total_scored": 136,
+  "score": 98.53,
+  "min_score": 90.0,
+  "meets_floor": true,
+  "gate_pass": true,
+  "enforce": true,
+  "failures": [
+    "file_permissions_ungroupowned",
+    "use_pam_wheel_group_for_su"
+  ],
+  "regressions": [],
+  "baseline": null,
+  "openscap_line": "OpenSCAP: pass=134 fail=2 score=98.5% (target 90%)"
+}
