@@ -2,7 +2,7 @@
 
 **Ansible hardening role** for **Ubuntu 22.04 LTS** (CIS Benchmark). Suitable for playbooks, Packer/Ansible provisioners, and golden-image pipelines. Search keywords: `ansible`, `ansible-role`, `cis`, `cis-benchmark`, `cis-hardening`, `compliance`, `devsecops`, `hardening`, `infrastructure`, `jammy`, `openscap`, `security`, `stigforge`, `ubuntu`.
 
-StigForge-exported Ansible role **`ubuntu22_cis`** · release **`0.3.0`**.
+StigForge-exported Ansible role **`ubuntu22_cis`** · release **`0.3.1`**.
 Matrix cell status: **`green`**.
 
 ## Install (Ansible Galaxy)
@@ -13,7 +13,7 @@ lives under `compliance/` and is not loaded when the role runs.
 From **Ansible Galaxy** (after import; namespace `stigready`):
 
 ```bash
-ansible-galaxy role install stigready.ubuntu22_cis,0.3.0
+ansible-galaxy role install stigready.ubuntu22_cis,0.3.1
 ```
 
 From **GitHub** (public):
@@ -23,7 +23,7 @@ From **GitHub** (public):
 roles:
   - src: https://github.com/stigready/ubuntu22-cis
     scm: git
-    version: v0.3.0   # or an immutable commit SHA
+    version: v0.3.1   # or an immutable commit SHA
     name: ubuntu22_cis
 ```
 
@@ -38,12 +38,8 @@ Evidence was produced by **docker verify + OpenSCAP** on the factory CI run cite
 
 | Profile | Score | Floor | Gate | Ansible | Evidence tested (UTC) |
 |---|---:|---:|---|---|---|
-| `cis-l1` | **98.51%** ✓ | 90.0% | PASS ✓ | rc 0 | 20260912T124212Z |
-| `cis-l2` | **98.53%** ✓ | 90.0% | PASS ✓ | rc 0 | 20260912T124505Z |
-| `cis-ws-l1` | **98.47%** ✓ | 90.0% | PASS ✓ | rc 0 | 20260912T124702Z |
-| `cis-ws-l2` | **98.52%** ✓ | 90.0% | PASS ✓ | rc 0 | 20260912T124937Z |
 
-Full artifacts per profile: `compliance/releases/0.3.0/<profile>/` (`score.json`, `results.xml`, `arf.xml`, `evidence.json`, `evidence-report.html`, `poam.md`).
+Full artifacts per profile: `compliance/releases/0.3.1/<profile>/` (`score.json`, `results.xml`, `arf.xml`, `evidence.json`, `evidence-report.html`, `poam.md`).
 
 ## Reports & review
 
@@ -56,7 +52,7 @@ Full artifacts per profile: `compliance/releases/0.3.0/<profile>/` (`score.json`
 Re-run OpenSCAP in Docker and compare to this release's evidence:
 
 ```bash
-make prove RELEASE=0.3.0
+make prove RELEASE=0.3.1
 ```
 
 Or score your own `results.xml`: see **[compliance/README.md](compliance/README.md)**.
@@ -68,7 +64,7 @@ Or score your own `results.xml`: see **[compliance/README.md](compliance/README.
 
 ## Factory
 
-- Monorepo: [stigready/stigforge](https://github.com/stigready/stigforge) @ `562a1f7c1a8e19235ee26e972174d1be6c88998c`
-- CI run: https://github.com/stigready/stigforge/actions/runs/34693316989
+- Monorepo: [stigready/stigforge](https://github.com/stigready/stigforge) @ `9a161e04bbdab156d492c2cb0f6afb2ab43beb30`
+- CI run: https://github.com/stigready/stigforge/actions/runs/35529346593
 - Catalog: [https://stigready.com/#stigforge](https://stigready.com/#stigforge)
 
