@@ -36,7 +36,6 @@ ubuntu22cis_accounts_user_interactive_home_directory_exists: true
 ubuntu22cis_aide_build_database: true
 ubuntu22cis_aide_check_audit_tools: true
 ubuntu22cis_aide_periodic_cron_checking: true
-ubuntu22cis_always: true
 ubuntu22cis_audit_rules_dac_modification_chmod: true
 ubuntu22cis_audit_rules_dac_modification_chown: true
 ubuntu22cis_audit_rules_dac_modification_fchmod: true
