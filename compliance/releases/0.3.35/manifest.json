@@ -1,0 +1,11 @@
+{
+  "role": "ubuntu22_cis",
+  "version": "0.3.35",
+  "factory_repo": "stigready/stigforge",
+  "matrix_status": "green",
+  "pipeline_run_id": "39043246080",
+  "factory_commit": "740f061c249b87ad1f7a249a92127dfa8a0ee215",
+  "content_digest": "c888fbd205e2ebc505cb42b0373364cf16957605a047bc467f7647be9d411ae8",
+  "container_verify": "removed-0017",
+  "compliance_evidence": "Not produced here. Container verify was removed by decision 0017 because a container cannot evaluate most STIG rules; compliance evidence for this role comes from the AMI build that consumes it in stigready/stigready."
+}
