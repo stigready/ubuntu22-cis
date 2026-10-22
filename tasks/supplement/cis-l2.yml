@@ -81,20 +81,6 @@
   tags:
     - accounts_passwords_pam_faillock_root_unlock_time
 
-# accounts_passwords_pam_faillock_enabled -- CIS Ubuntu 24.04 5.3.2.2 / Debian 12 5.3.2.2:
-# "Ensure pam_faillock module is enabled". The CIS remediation on Debian-family is two
-# pam-auth-update profiles, not edits to common-auth. The previous version of this supplement
-# appended `[default=die] pam_faillock.so authfail` to the END of common-auth (lineinfile with
-# no insert anchor), which is AFTER pam_permit on the success path: a correct password
-# reached authfail, was recorded as a failure, and the stack died. Every password
-# authentication failed (sudo -S, su, console) -- stigforge#84, found by the stigvalidated
-# lane on 2026-09-24. The SSG OVAL check only requires preauth...pam_unix...authfail in that
-# order anywhere in the file, so the broken file scored as a pass.
-#
-# pam-auth-update places the entries by Priority inside the Primary block: preauth (1024)
-# before pam_unix (256), authfail (0) immediately after it, and `account required
-# pam_faillock.so` in common-account. That is the stack CIS describes and the one that
-# lets a correct password through.
 - name: StigForge supplement - pam-auth-update profile for pam_faillock authfail (accounts_passwords_pam_faillock_enabled)
   ansible.builtin.copy:
     dest: /usr/share/pam-configs/faillock
