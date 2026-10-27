@@ -268,6 +268,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Ensure apparmor-utils is installed'' raised an error (module or templating) and was skipped; continuing
         so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_apparmor_utils_installed | default(true)
+    | bool)
 - name: 'StigForge: refresh package facts after ''Ensure apparmor-utils is installed'' installed a package'
   ansible.builtin.package_facts:
     manager: auto
@@ -322,6 +324,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Ensure systemd-journal-remote is installed'' raised an error (module or templating) and was skipped;
         continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_systemd_journal_remote_installed | default(true)
+    | bool)
 - name: 'StigForge: refresh package facts after ''Ensure systemd-journal-remote is installed'' installed a package'
   ansible.builtin.package_facts:
     manager: auto
@@ -350,6 +354,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Ensure iptables-persistent is installed'' raised an error (module or templating) and was skipped;
         continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_iptables_persistent_installed | default(true)
+    | bool)
 - name: 'StigForge: refresh package facts after ''Ensure iptables-persistent is installed'' installed a package'
   ansible.builtin.package_facts:
     manager: auto
@@ -409,6 +415,8 @@
       msg: 'StigForge: ''Remove iptables-persistent Package: Ensure iptables-persistent is removed'' raised an error (module
         or templating) and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state
         independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_iptables_persistent_removed | default(true)
+    | bool)
 - block:
   - name: Ensure nftables is installed
     ansible.builtin.package:
@@ -771,6 +779,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Ensure LDAP client is not installed: Ensure ldap-utils is removed'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_openldap_clients_removed | default(true)
+    | bool)
 - block:
   - name: 'Uninstall slapd Package: Ensure slapd is removed'
     ansible.builtin.package:
@@ -792,6 +802,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Uninstall slapd Package: Ensure slapd is removed'' raised an error (module or templating) and was
         skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_openldap_servers_removed | default(true)
+    | bool)
 - block:
   - name: 'Uninstall nfs-kernel-server Package: Ensure nfs-kernel-server is removed'
     ansible.builtin.package:
@@ -812,6 +824,8 @@
       msg: 'StigForge: ''Uninstall nfs-kernel-server Package: Ensure nfs-kernel-server is removed'' raised an error (module
         or templating) and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state
         independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_nfs_kernel_server_removed | default(true)
+    | bool)
 - block:
   - name: 'Uninstall rpcbind Package: Ensure rpcbind is removed'
     ansible.builtin.package:
@@ -1053,6 +1067,7 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Uninstall tftpd-hpa Package: Ensure tftpd-hpa is removed'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_tftp_server_removed | default(true) | bool)
 - block:
   - name: 'Uninstall CUPS Package: Ensure cups is removed'
     ansible.builtin.package:
@@ -1132,6 +1147,7 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Uninstall net-snmp Package: Ensure snmp is removed'' raised an error (module or templating) and was
         skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_package_net_snmp_removed | default(true) | bool)
 - block:
   - name: Enable systemd-journal-upload Service - Enable service systemd-journal-upload
     block:
@@ -1162,7 +1178,8 @@
       msg: 'StigForge: ''Enable systemd-journal-upload Service - Enable service systemd-journal-upload'' raised an error (module
         or templating) and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state
         independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_systemd_journal_upload_enabled | default(true)
+    | bool)
 - block:
   - name: Enable systemd-journald Service - Enable service systemd-journald
     block:
@@ -1190,7 +1207,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Enable systemd-journald Service - Enable service systemd-journald'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_systemd_journald_enabled | default(true)
+    | bool)
 - block:
   - name: Verify nftables Service is Enabled - Enable service nftables
     block:
@@ -1460,7 +1478,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Disable Avahi Server Software - Disable service avahi-daemon'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_avahi_daemon_disabled | default(true) |
+    bool)
 - block:
   - name: Enable cron Service - Enable service cron
     block:
@@ -1487,7 +1506,7 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Enable cron Service - Enable service cron'' raised an error (module or templating) and was skipped;
         continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_cron_enabled | default(true) | bool)
 - block:
   - name: Disable DHCPD6 Service - Disable service dhcpd6
     block:
@@ -1947,7 +1966,7 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Disable Network File System (nfs) - Disable service nfs-server'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_nfs_disabled | default(true) | bool)
 - block:
   - name: Ensure rsyncd service is disabled - Disable service rsyncd
     block:
@@ -2269,7 +2288,7 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Disable Samba - Disable service smbd'' raised an error (module or templating) and was skipped; continuing
         so later rules still run. OpenSCAP evaluates the resulting system state independently.'
-  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_special_service_block | default(true) | bool)
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_service_smb_disabled | default(true) | bool)
 - block:
   - name: Disable snmpd Service - Disable service snmpd
     block:
@@ -2752,6 +2771,156 @@
       msg: 'StigForge: ''Remove lines containing !authenticate from sudoers files'' raised an error (module or templating)
         and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
   when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_remove_no_authenticate | default(true) | bool)
+- block:
+  - name: Require Re-Authentication When Using the sudo Command - Find /etc/sudoers.d/* files containing 'Defaults timestamp_timeout'
+    ansible.builtin.find:
+      path: /etc/sudoers.d
+      patterns: '*'
+      contains: ^[\s]*Defaults\s.*\btimestamp_timeout[\s]*=.*
+    register: sudoers_d_defaults_timestamp_timeout
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"sudo" in ansible_facts.packages'
+    tags:
+    - NIST-800-53-IA-11
+    - PCI-DSSv4-2.2
+    - PCI-DSSv4-2.2.6
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+    - sudo_require_reauthentication
+  rescue:
+  - name: 'StigForge: continue after error in "Require Re-Authentication When Using the sudo Command - Find /etc/sudoers.d/*
+      files containing ''Defaults timestamp_timeout''" (OpenSCAP is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: "Require Re-Authentication When Using the sudo Command - Find /etc/sudoers.d/* files containing ''Defaults
+        timestamp_timeout''" raised an error (module or templating) and was skipped; continuing so later rules still run.
+        OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_require_reauthentication | default(true) |
+    bool)
+- block:
+  - name: Require Re-Authentication When Using the sudo Command - Remove 'Defaults timestamp_timeout' from /etc/sudoers.d/*
+      files
+    ansible.builtin.lineinfile:
+      path: '{{ item.path }}'
+      regexp: ^[\s]*Defaults\s.*\btimestamp_timeout[\s]*=.*
+      state: absent
+    with_items: '{{ sudoers_d_defaults_timestamp_timeout.files }}'
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"sudo" in ansible_facts.packages'
+    tags:
+    - NIST-800-53-IA-11
+    - PCI-DSSv4-2.2
+    - PCI-DSSv4-2.2.6
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+    - sudo_require_reauthentication
+  rescue:
+  - name: 'StigForge: continue after error in "Require Re-Authentication When Using the sudo Command - Remove ''Defaults timestamp_timeout''
+      from /etc/sudoers.d/* files" (OpenSCAP is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: "Require Re-Authentication When Using the sudo Command - Remove ''Defaults timestamp_timeout'' from
+        /etc/sudoers.d/* files" raised an error (module or templating) and was skipped; continuing so later rules still run.
+        OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_require_reauthentication | default(true) |
+    bool)
+- block:
+  - name: Require Re-Authentication When Using the sudo Command - Ensure timestamp_timeout has the appropriate value in /etc/sudoers
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers
+      regexp: ^[\s]*Defaults\s(.*)\btimestamp_timeout[\s]*=[\s]*[-]?\w+\b(.*)$
+      line: Defaults \1timestamp_timeout={{ var_sudo_timestamp_timeout }}\2
+      validate: /usr/sbin/visudo -cf %s
+      backrefs: true
+    register: edit_sudoers_timestamp_timeout_option
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"sudo" in ansible_facts.packages'
+    tags:
+    - NIST-800-53-IA-11
+    - PCI-DSSv4-2.2
+    - PCI-DSSv4-2.2.6
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+    - sudo_require_reauthentication
+  rescue:
+  - name: 'StigForge: continue after error in ''Require Re-Authentication When Using the sudo Command - Ensure timestamp_timeout
+      has the appropriate value in /etc/sudoers'' (OpenSCAP is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: ''Require Re-Authentication When Using the sudo Command - Ensure timestamp_timeout has the appropriate
+        value in /etc/sudoers'' raised an error (module or templating) and was skipped; continuing so later rules still run.
+        OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_require_reauthentication | default(true) |
+    bool)
+- block:
+  - name: Require Re-Authentication When Using the sudo Command - Enable timestamp_timeout option with correct value in /etc/sudoers
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers
+      line: Defaults timestamp_timeout={{ var_sudo_timestamp_timeout }}
+      validate: /usr/sbin/visudo -cf %s
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"sudo" in ansible_facts.packages'
+    - 'edit_sudoers_timestamp_timeout_option is defined and not edit_sudoers_timestamp_timeout_option.changed
+
+      '
+    tags:
+    - NIST-800-53-IA-11
+    - PCI-DSSv4-2.2
+    - PCI-DSSv4-2.2.6
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+    - sudo_require_reauthentication
+  rescue:
+  - name: 'StigForge: continue after error in ''Require Re-Authentication When Using the sudo Command - Enable timestamp_timeout
+      option with correct value in /etc/sudoers'' (OpenSCAP is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: ''Require Re-Authentication When Using the sudo Command - Enable timestamp_timeout option with correct
+        value in /etc/sudoers'' raised an error (module or templating) and was skipped; continuing so later rules still run.
+        OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_require_reauthentication | default(true) |
+    bool)
+- block:
+  - name: Require Re-Authentication When Using the sudo Command - Remove timestamp_timeout wrong values in /etc/sudoers
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers
+      regexp: ^[\s]*Defaults\s.*\btimestamp_timeout[\s]*=[\s]*(?!{{ var_sudo_timestamp_timeout }}\b)[-]?\w+\b.*$
+      state: absent
+      validate: /usr/sbin/visudo -cf %s
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"sudo" in ansible_facts.packages'
+    tags:
+    - NIST-800-53-IA-11
+    - PCI-DSSv4-2.2
+    - PCI-DSSv4-2.2.6
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+    - sudo_require_reauthentication
+  rescue:
+  - name: 'StigForge: continue after error in ''Require Re-Authentication When Using the sudo Command - Remove timestamp_timeout
+      wrong values in /etc/sudoers'' (OpenSCAP is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: ''Require Re-Authentication When Using the sudo Command - Remove timestamp_timeout wrong values in
+        /etc/sudoers'' raised an error (module or templating) and was skipped; continuing so later rules still run. OpenSCAP
+        evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_sudo_require_reauthentication | default(true) |
+    bool)
 - block:
   - name: Ensure Local Login Warning Banner Is Configured Properly - Copy using inline content
     ansible.builtin.copy:
@@ -3624,11 +3793,41 @@
         OpenSCAP evaluates the resulting system state independently.'
   when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_accounts_password_pam_difok | default(true) | bool)
 - block:
+  - name: Ensure PAM Enforces Password Requirements - Enforce for root User
+    ansible.builtin.lineinfile:
+      path: /etc/security/pwquality.conf
+      create: true
+      regexp: ^\s*enforce_for_root\s*$
+      line: enforce_for_root
+      state: present
+    when:
+    - '"linux-base" in ansible_facts.packages'
+    - '"libpwquality1" in ansible_facts.packages'
+    tags:
+    - NIST-800-53-CM-6(a)
+    - NIST-800-53-IA-5(1)(a)
+    - NIST-800-53-IA-5(4)
+    - NIST-800-53-IA-5(c)
+    - accounts_password_pam_enforce_root
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  rescue:
+  - name: 'StigForge: continue after error in ''Ensure PAM Enforces Password Requirements - Enforce for root User'' (OpenSCAP
+      is the score gate)'
+    ansible.builtin.debug:
+      msg: 'StigForge: ''Ensure PAM Enforces Password Requirements - Enforce for root User'' raised an error (module or templating)
+        and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_accounts_password_pam_enforce_root | default(true)
+    | bool)
+- block:
   - name: Ensure PAM Enforces Password Requirements - Enforcing
     ansible.builtin.lineinfile:
       path: /etc/security/pwquality.conf
       create: true
-      regexp: ''
+      regexp: ^\s*enforcing\s*=
       line: enforcing = 1
       state: present
     when:
@@ -6753,6 +6952,8 @@
       msg: 'StigForge: ''Disable systemd-journal-remote Socket - Collect systemd Socket Units Present in the System'' raised
         an error (module or templating) and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting
         system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_socket_systemd_journal_remote_disabled | default(true)
+    | bool)
 - block:
   - name: Disable systemd-journal-remote Socket - Ensure systemd-journal-remote.socket is Masked
     ansible.builtin.systemd:
@@ -6777,6 +6978,8 @@
       msg: 'StigForge: ''Disable systemd-journal-remote Socket - Ensure systemd-journal-remote.socket is Masked'' raised an
         error (module or templating) and was skipped; continuing so later rules still run. OpenSCAP evaluates the resulting
         system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_socket_systemd_journal_remote_disabled | default(true)
+    | bool)
 - block:
   - name: Check if IPv6 is enabled
     ansible.builtin.command: sysctl -n net.ipv6.conf.all.disable_ipv6
@@ -13940,7 +14143,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupowner_var_log_auth_newgroup is undefined
     tags:
     - configure_strategy
@@ -13949,6 +14151,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -13979,7 +14182,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_auth_newgroup is undefined
     tags:
     - configure_strategy
@@ -13988,6 +14190,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14056,7 +14259,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupowner_var_log_cloud_init_newgroup is undefined
     tags:
     - configure_strategy
@@ -14065,6 +14267,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14098,7 +14301,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_cloud_init_newgroup is undefined
     tags:
     - configure_strategy
@@ -14107,6 +14309,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14187,7 +14390,6 @@
     ansible.builtin.getent:
       database: group
       key: systemd-journal
-    ignore_errors: true
     when: file_groupowner_var_log_journal_newgroup is undefined
     tags:
     - configure_strategy
@@ -14196,6 +14398,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the systemd-journal group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14229,7 +14432,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_journal_newgroup is undefined
     tags:
     - configure_strategy
@@ -14238,6 +14440,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14318,7 +14521,6 @@
     ansible.builtin.getent:
       database: group
       key: utmp
-    ignore_errors: true
     when: file_groupowner_var_log_lastlog_newgroup is undefined
     tags:
     - configure_strategy
@@ -14327,6 +14529,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the utmp group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14360,7 +14563,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_lastlog_newgroup is undefined
     tags:
     - configure_strategy
@@ -14369,6 +14571,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14450,7 +14653,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupowner_var_log_localmessages_newgroup is undefined
     tags:
     - configure_strategy
@@ -14459,6 +14661,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14492,7 +14695,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_localmessages_newgroup is undefined
     tags:
     - configure_strategy
@@ -14501,6 +14703,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14641,7 +14844,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupowner_var_log_secure_newgroup is undefined
     tags:
     - configure_strategy
@@ -14650,6 +14852,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14682,7 +14885,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_secure_newgroup is undefined
     tags:
     - configure_strategy
@@ -14691,6 +14893,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14839,7 +15042,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupowner_var_log_waagent_newgroup is undefined
     tags:
     - configure_strategy
@@ -14848,6 +15050,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14881,7 +15084,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_waagent_newgroup is undefined
     tags:
     - configure_strategy
@@ -14890,6 +15092,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -14969,7 +15172,6 @@
     ansible.builtin.getent:
       database: group
       key: utmp
-    ignore_errors: true
     when: file_groupowner_var_log_wbtmp_newgroup is undefined
     tags:
     - configure_strategy
@@ -14978,6 +15180,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the utmp group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15010,7 +15213,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupowner_var_log_wbtmp_newgroup is undefined
     tags:
     - configure_strategy
@@ -15019,6 +15221,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15099,7 +15302,6 @@
     ansible.builtin.getent:
       database: group
       key: adm
-    ignore_errors: true
     when: file_groupownerships_var_log_apt_newgroup is undefined
     tags:
     - configure_strategy
@@ -15108,6 +15310,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the adm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15141,7 +15344,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupownerships_var_log_apt_newgroup is undefined
     tags:
     - configure_strategy
@@ -15150,6 +15352,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15229,7 +15432,6 @@
     ansible.builtin.getent:
       database: group
       key: gdm
-    ignore_errors: true
     when: file_groupownerships_var_log_gdm_newgroup is undefined
     tags:
     - configure_strategy
@@ -15238,6 +15440,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the gdm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15271,7 +15474,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupownerships_var_log_gdm_newgroup is undefined
     tags:
     - configure_strategy
@@ -15280,6 +15482,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15359,7 +15562,6 @@
     ansible.builtin.getent:
       database: group
       key: gdm
-    ignore_errors: true
     when: file_groupownerships_var_log_gdm3_newgroup is undefined
     tags:
     - configure_strategy
@@ -15368,6 +15570,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the gdm group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15401,7 +15604,6 @@
     ansible.builtin.getent:
       database: group
       key: gdm3
-    ignore_errors: true
     when: file_groupownerships_var_log_gdm3_newgroup is undefined
     tags:
     - configure_strategy
@@ -15410,6 +15612,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the gdm3 group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15443,7 +15646,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupownerships_var_log_gdm3_newgroup is undefined
     tags:
     - configure_strategy
@@ -15452,6 +15654,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15532,7 +15735,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupownerships_var_log_landscape_newgroup is undefined
     tags:
     - configure_strategy
@@ -15541,6 +15743,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15574,7 +15777,6 @@
     ansible.builtin.getent:
       database: group
       key: landscape
-    ignore_errors: true
     when: file_groupownerships_var_log_landscape_newgroup is undefined
     tags:
     - configure_strategy
@@ -15583,6 +15785,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the landscape group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15662,7 +15865,6 @@
     ansible.builtin.getent:
       database: group
       key: sssd
-    ignore_errors: true
     when: file_groupownerships_var_log_sssd_newgroup is undefined
     tags:
     - configure_strategy
@@ -15671,6 +15873,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the sssd group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15704,7 +15907,6 @@
     ansible.builtin.getent:
       database: group
       key: root
-    ignore_errors: true
     when: file_groupownerships_var_log_sssd_newgroup is undefined
     tags:
     - configure_strategy
@@ -15713,6 +15915,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15793,7 +15996,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_owner_var_log_auth
@@ -15801,6 +16003,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15831,7 +16034,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_owner_var_log_auth_newown is undefined
     tags:
     - configure_strategy
@@ -15840,6 +16042,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15908,7 +16111,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_owner_var_log_cloud_init
@@ -15916,6 +16118,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -15948,7 +16151,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_owner_var_log_cloud_init_newown is undefined
     tags:
     - configure_strategy
@@ -15957,6 +16159,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16162,7 +16365,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_owner_var_log_localmessages
@@ -16170,6 +16372,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16203,7 +16406,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_owner_var_log_localmessages_newown is undefined
     tags:
     - configure_strategy
@@ -16212,6 +16414,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16349,7 +16552,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_owner_var_log_secure
@@ -16357,6 +16559,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16387,7 +16590,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_owner_var_log_secure_newown is undefined
     tags:
     - configure_strategy
@@ -16396,6 +16598,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16471,7 +16674,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     when: '"rsyslog" in ansible_facts.packages'
     tags:
     - DISA-STIG-UBTU-22-232130
@@ -16481,6 +16683,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16557,7 +16760,6 @@
     ansible.builtin.getent:
       database: passwd
       key: syslog
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_owner_var_log_waagent
@@ -16565,6 +16767,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the syslog user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16595,7 +16798,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_owner_var_log_waagent_newown is undefined
     tags:
     - configure_strategy
@@ -16604,6 +16806,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16930,7 +17133,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_ownerships_var_log_landscape
@@ -16938,6 +17140,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -16971,7 +17174,6 @@
     ansible.builtin.getent:
       database: passwd
       key: landscape
-    ignore_errors: true
     when: file_ownerships_var_log_landscape_newown is undefined
     tags:
     - configure_strategy
@@ -16980,6 +17182,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the landscape user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -17059,7 +17262,6 @@
     ansible.builtin.getent:
       database: passwd
       key: sssd
-    ignore_errors: true
     tags:
     - configure_strategy
     - file_ownerships_var_log_sssd
@@ -17067,6 +17269,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the sssd user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -17097,7 +17300,6 @@
     ansible.builtin.getent:
       database: passwd
       key: root
-    ignore_errors: true
     when: file_ownerships_var_log_sssd_newown is undefined
     tags:
     - configure_strategy
@@ -17106,6 +17308,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the root user is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -17277,6 +17480,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Find /var/log/ file(s)'' raised an error (module or templating) and was skipped; continuing so later
         rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_file_permissions_var_log_cloud_init | default(true)
+    | bool)
 - block:
   - name: Set permissions for /var/log/ file(s)
     ansible.builtin.file:
@@ -17297,6 +17502,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: ''Set permissions for /var/log/ file(s)'' raised an error (module or templating) and was skipped; continuing
         so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_file_permissions_var_log_cloud_init | default(true)
+    | bool)
 - block:
   - name: Find /var/log/gdm/ file(s) recursively
     ansible.builtin.command: find -P /var/log/gdm/  -perm /u+xs,g+xs,o+xwrt  -type f -regextype posix-extended -regex ".*"
@@ -18018,6 +18225,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: "Ensure kernel module ''usb-storage'' is disabled" raised an error (module or templating) and was skipped;
         continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_kernel_module_usb_storage_disabled | default(true)
+    | bool)
 - block:
   - name: Ensure kernel module 'usb-storage' is blacklisted
     ansible.builtin.lineinfile:
@@ -18048,6 +18257,8 @@
     ansible.builtin.debug:
       msg: 'StigForge: "Ensure kernel module ''usb-storage'' is blacklisted" raised an error (module or templating) and was
         skipped; continuing so later rules still run. OpenSCAP evaluates the resulting system state independently.'
+  when: (stigforge_rules_enabled | default(true) | bool) and (ubuntu22cis_kernel_module_usb_storage_disabled | default(true)
+    | bool)
 - block:
   - name: 'Add nodev Option to /dev/shm: Check information associated to mountpoint'
     ansible.builtin.command: findmnt  '/dev/shm'
@@ -23099,7 +23310,6 @@
     ansible.builtin.getent:
       database: group
       key: crontab
-    ignore_errors: true
     when:
     - '"linux-base" in ansible_facts.packages'
     - file_groupowner_cron_allow_newgroup is undefined
@@ -23114,6 +23324,7 @@
     - low_disruption
     - medium_severity
     - no_reboot_needed
+    failed_when: false
   rescue:
   - name: 'StigForge: continue after error in ''Check that the crontab group is defined'' (OpenSCAP is the score gate)'
     ansible.builtin.debug:
@@ -24481,6 +24692,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "ClientAliveCountMax"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -24582,6 +24794,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "ClientAliveCountMax"| regex_escape }}\s+{{ var_sshd_set_keepalive }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -24657,6 +24870,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "ClientAliveCountMax"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -24757,6 +24971,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "ClientAliveInterval"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -24864,6 +25079,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "ClientAliveInterval"| regex_escape }}\s+{{ sshd_idle_timeout_value }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -24943,6 +25159,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "ClientAliveInterval"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -25047,6 +25264,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "HostbasedAuthentication"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -25143,6 +25361,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "HostbasedAuthentication"| regex_escape }}\s+no$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -25214,6 +25433,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "HostbasedAuthentication"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -25310,6 +25530,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitEmptyPasswords"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -25413,6 +25634,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitEmptyPasswords"| regex_escape }}\s+no$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -25489,6 +25711,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "PermitEmptyPasswords"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -25589,6 +25812,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "IgnoreRhosts"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -25682,6 +25906,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "IgnoreRhosts"| regex_escape }}\s+yes$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -25751,6 +25976,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "IgnoreRhosts"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -25845,6 +26071,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -25952,6 +26179,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+no$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -26031,6 +26259,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "PermitRootLogin"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -26135,6 +26364,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitUserEnvironment"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -26234,6 +26464,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "PermitUserEnvironment"| regex_escape }}\s+no$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -26307,6 +26538,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "PermitUserEnvironment"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -26405,6 +26637,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "UsePAM"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -26482,6 +26715,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "UsePAM"| regex_escape }}\s+yes$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -26541,6 +26775,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "UsePAM"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -26625,6 +26860,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "Banner"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -26717,6 +26953,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "Banner"| regex_escape }}\s+/etc/issue.net$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -26786,6 +27023,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "Banner"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -26880,6 +27118,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "LoginGraceTime"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -26955,6 +27194,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "LoginGraceTime"| regex_escape }}\s+{{ var_sshd_set_login_grace_time }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -27012,6 +27252,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "LoginGraceTime"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -27094,6 +27335,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "LogLevel"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -27168,6 +27410,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "LogLevel"| regex_escape }}\s+INFO$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -27225,6 +27468,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "LogLevel"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -27307,6 +27551,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxAuthTries"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -27382,6 +27627,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxAuthTries"| regex_escape }}\s+{{ sshd_max_auth_tries_value }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -27439,6 +27685,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "MaxAuthTries"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -27521,6 +27768,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxSessions"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -27595,6 +27843,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxSessions"| regex_escape }}\s+{{ var_sshd_max_sessions }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -27652,6 +27901,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "MaxSessions"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -27734,6 +27984,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxStartups"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -27809,6 +28060,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MaxStartups"| regex_escape }}\s+{{ var_sshd_set_maxstartups }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -27866,6 +28118,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "MaxStartups"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -27948,6 +28201,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "KexAlgorithms"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -28026,6 +28280,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "KexAlgorithms"| regex_escape }}\s+{{ sshd_strong_kex }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -28085,6 +28340,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "KexAlgorithms"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
@@ -28169,6 +28425,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MACs"| regex_escape }}\s+
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_has_parameter
@@ -28240,6 +28497,7 @@
       path: /etc/ssh/sshd_config
       regexp: (?i)^\s*{{ "MACs"| regex_escape }}\s+{{ sshd_strong_macs }}$
       state: absent
+      validate: /usr/sbin/sshd -t -f %s
     check_mode: true
     changed_when: false
     register: _config_file_correctly
@@ -28295,6 +28553,7 @@
         create: false
         regexp: (?i)(?i)^\s*{{ "MACs"| regex_escape }}\s+
         state: absent
+        validate: /usr/sbin/sshd -t -f %s
     - name: Check if /etc/ssh/sshd_config.d exists
       ansible.builtin.stat:
         path: /etc/ssh/sshd_config.d
